@@ -1,6 +1,7 @@
 import React from 'react'
-import './UserCard.css'
-function UserCard(props) {
+import './UserInfoCard.css'
+import { Link } from 'react-router-dom'
+function UserInfoCard(props) {
     return (
         <div className="card-wrapper">
             <div className="card" style={{ width: "26rem" }}>
@@ -12,11 +13,13 @@ function UserCard(props) {
                         <div><i className="bi bi-telephone"></i>  {props.phone}</div>
                         <div><i className="bi bi-globe"></i>  {props.website}</div>
                     </div>
-                    <a href="#" className="btn btn-primary">View details</a>
+                    <Link to={`user/${props.id}`} className="btn btn-primary">
+                        View details
+                    </Link>
                 </div>
             </div>
         </div>
     )
 }
 
-export default UserCard
+export default UserInfoCard

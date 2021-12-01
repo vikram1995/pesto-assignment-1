@@ -1,25 +1,37 @@
 
 import './App.css';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
-import UserCard from './Components/UserCard/UserCard';
+import UserListPage from './Components/UserListPage/UserListPage'
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
+import UserdetailsPage from './Components/UserDetailsPage/UserdetailsPage';
 
 function App() {
   const [usersList, setUsersList] = useState(null)
-
+  const [fetchError, setFetchError] = useState(null)
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/users').then(response  => response.json()).then(data=> {
+    try {
+      fetch('https://jsonplaceholder.typicode.com/users').then(response => response.json()).then(data => {
       console.log(data);
       setUsersList(data);
     })
+    } catch (error) {
+      setFetchError(true)
+    }
+    
   }, [])
 
   return (
-    <div className="App container">
-      {usersList && usersList.map(user => {
-        return <UserCard {...user} key={user.id} />
-      })}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={usersList && <UserListPage usersList={usersList}/> } />
+        <Route path="user/:id" element={usersList &&  <UserdetailsPage usersList={usersList}/>} />
+      </Routes>
+    </BrowserRouter>
+
   );
 }
 
