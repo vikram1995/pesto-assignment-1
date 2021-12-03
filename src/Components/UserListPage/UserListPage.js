@@ -6,7 +6,7 @@ function UserListPage({usersList}) {
  
     return (
         <div>
-            <div className="App container">
+            <div className="App container mt-3">
                 {usersList && usersList.map(user => {
                     return <UserInfoCard {...user} key={user.id} />
                 })}

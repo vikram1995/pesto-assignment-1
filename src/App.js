@@ -7,11 +7,11 @@ import {
   Routes,
   Route
 } from "react-router-dom";
-import UserdetailsPage from './Components/UserDetailsPage/UserdetailsPage';
+import UserDetailsPage from './Components/UserDetailsPage/UserDetailsPage';
 
 function App() {
   const [usersList, setUsersList] = useState(null)
-  const [fetchError, setFetchError] = useState(null)
+  const [errorMsg, setErrorMsg] = useState(null)
   useEffect(() => {
     try {
       fetch('https://jsonplaceholder.typicode.com/users').then(response => response.json()).then(data => {
@@ -19,7 +19,7 @@ function App() {
       setUsersList(data);
     })
     } catch (error) {
-      setFetchError(true)
+      setErrorMsg("Failed to fetch data from server")
     }
     
   }, [])
@@ -28,7 +28,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={usersList && <UserListPage usersList={usersList}/> } />
-        <Route path="user/:id" element={usersList &&  <UserdetailsPage usersList={usersList}/>} />
+        <Route path="user/:id" element={usersList &&  <UserDetailsPage usersList={usersList}/>} />
       </Routes>
     </BrowserRouter>
 
