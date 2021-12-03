@@ -1,0 +1,13 @@
+.card-wrapper{
+    margin: 5px;
+}
+.user-contact{
+    margin: 10px 0;
+    padding-inline-start: 0;
+}
+
+.user-contact li{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
