@@ -3,6 +3,7 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import UserListPage from './Components/UserListPage/UserListPage'
 import LoadingSpinner from './Components/LoadingSpinner/LoadingSpinner'
+import SignUp from './Components/SignUp/SignUp';
 import {
   BrowserRouter,
   Routes,
@@ -31,6 +32,7 @@ function App() {
       <Routes>
         <Route path="/" element={usersList && <UserListPage usersList={usersList}/> } />
         <Route path="user/:id" element={usersList &&  <UserDetailsPage usersList={usersList}/>} />
+        <Route path="sign-up" element={<SignUp/>} />
       </Routes>
     </BrowserRouter>
     </div>
