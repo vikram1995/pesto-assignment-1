@@ -10,7 +10,8 @@ import { auth } from './firebase-config'
 import {
   BrowserRouter,
   Routes,
-  Route
+  Route,
+  Navigate
 } from "react-router-dom";
 import UserDetailsPage from './Components/UserDetailsPage/UserDetailsPage';
 import SignIn from './Components/SignIn/SignIn';
@@ -38,6 +39,9 @@ function App() {
     })
   }, [])
 
+  function PrivateRoute({ children }) {
+    return userEmail ? children : <Navigate to="/sign-in" />;
+  }
 
   return (
     <div>
@@ -45,7 +49,7 @@ function App() {
         <NavBar userEmail={userEmail ? userEmail : ""} setuserEmail={setuserEmail}/>
         <Routes>
           <Route path="/" element={usersList && <UserListPage usersList={usersList} />} />
-          <Route path="user/:id" element={usersList && <UserDetailsPage usersList={usersList} />} />
+          <Route path="user/:id" element={usersList && <PrivateRoute><UserDetailsPage usersList={usersList}/></PrivateRoute>} />
           <Route path="sign-up" element={<SignUp setuserEmail={setuserEmail} />} />
           <Route path="sign-in" element={<SignIn setuserEmail={setuserEmail} />} />
         </Routes>
