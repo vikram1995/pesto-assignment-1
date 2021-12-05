@@ -1,0 +1,8 @@
+.user-auth-box{
+    display: flex;
+    align-items: flex-end;
+    color: white;
+}
+.navbar-collapse{
+    justify-content: end
+}

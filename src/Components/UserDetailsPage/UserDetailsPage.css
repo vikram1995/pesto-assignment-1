@@ -6,12 +6,12 @@
     text-decoration: none;
     color: black;
 }
-ul {
+.user-detail ul {
     font-size: 1.5em;
     padding-inline-start: 0;
 }
 
-li{
+.user-detail li{
     list-style: none;
 }
 address{
