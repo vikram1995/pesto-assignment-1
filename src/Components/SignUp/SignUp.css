@@ -1,0 +1,22 @@
+.sign-up-page{
+    width:100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+.sign-up-form-box{
+    position: relative;
+    top: 15%;
+    /* width: 400px; */
+    height: 300px;
+    border: 1px solid rgb(182, 182, 182);
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 5px 5px 5px grey;
+}
+
+.sign-up-form-box input {
+    margin-bottom: 30px;
+}
