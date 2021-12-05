@@ -12,7 +12,7 @@ function NavBar(props) {
     }
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark p-3">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <Link to={`/`} className="nav-link">
                 <h3 style={{ color: "white" }}>User List</h3>
             </Link>
