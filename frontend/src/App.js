@@ -7,6 +7,7 @@ import SignUp from './Components/SignUp/SignUp';
 import NavBar from './Components/Navbar/NavBar';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from './firebase-config'
+import Config from './Config/config'
 import {
   BrowserRouter,
   Routes,
@@ -22,7 +23,7 @@ function App() {
 
   useEffect(async () => {
     try {
-      const response = await fetch('https://jsonplaceholder.typicode.com/users')
+      const response = await fetch(`${Config.serverUrl}/users`)
       const data = await response.json();
       setUsersList(data);
     } catch (error) {
