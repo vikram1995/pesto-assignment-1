@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase-config';
 import store from '../../store'
@@ -27,9 +27,9 @@ function SignUp() {
     }
     return (
         <div className="sign-up-page">
-             
+
             <div className="sign-up-form-box">
-            {errorMsg &&<div style={{color:"red"}}>{errorMsg}</div>}
+                {errorMsg && <div style={{ color: "red" }}>{errorMsg}</div>}
                 <form>
                     <div className="form-group">
                         <label>Email <input type="email" class="form-control" placeholder="Enter email" onChange={(e) => setregisterEmail(e.target.value)} /></label>

@@ -22,7 +22,6 @@ function App() {
   const [usersList, setUsersList] = useState(null)
   const [userEmail, setuserEmail] = useState(null)
 
-  console.log('Initial state: ', store.getState())
   const unsubscribe = store.subscribe(() => {
     const state = store.getState().Apps
     if (state.authUser) {
@@ -31,9 +30,7 @@ function App() {
     else {
       setuserEmail(null)
     }
-  }
-
-  )
+  })
 
 
   useEffect(async () => {
