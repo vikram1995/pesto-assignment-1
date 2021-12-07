@@ -8,6 +8,7 @@ import NavBar from './Components/Navbar/NavBar';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from './firebase-config'
 import Config from './Config/config'
+import store from './store'
 import {
   BrowserRouter,
   Routes,
@@ -21,11 +22,26 @@ function App() {
   const [usersList, setUsersList] = useState(null)
   const [userEmail, setuserEmail] = useState(null)
 
+  console.log('Initial state: ', store.getState())
+  const unsubscribe = store.subscribe(() => {
+    const state = store.getState().Apps
+    if (state.authUser) {
+      setuserEmail(state.authUser.email)
+    }
+    else {
+      setuserEmail(null)
+    }
+  }
+
+  )
+
+
   useEffect(async () => {
     try {
       const response = await fetch(`${Config.serverUrl}/users`)
       const data = await response.json();
       setUsersList(data);
+      store.dispatch({ type: 'App/usersList', payload: data })
     } catch (error) {
       console.log("falied to fetch data from server")
     }
@@ -35,6 +51,7 @@ function App() {
     onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setuserEmail(currentUser.email);
+        store.dispatch({ type: 'App/authUser', payload: currentUser })
         console.log(currentUser.email)
       }
     })
@@ -47,12 +64,12 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-        <NavBar userEmail={userEmail ? userEmail : ""} setuserEmail={setuserEmail}/>
+        <NavBar />
         <Routes>
           <Route path="/" element={usersList && <UserListPage usersList={usersList} />} />
-          <Route path="user/:id" element={usersList && <PrivateRoute><UserDetailsPage usersList={usersList}/></PrivateRoute>} />
-          <Route path="sign-up" element={<SignUp setuserEmail={setuserEmail} />} />
-          <Route path="sign-in" element={<SignIn setuserEmail={setuserEmail} />} />
+          <Route path="user/:id" element={usersList && <PrivateRoute><UserDetailsPage usersList={usersList} /></PrivateRoute>} />
+          <Route path="sign-up" element={<SignUp />} />
+          <Route path="sign-in" element={<SignIn />} />
         </Routes>
       </BrowserRouter>
       {!usersList && <LoadingSpinner />}
