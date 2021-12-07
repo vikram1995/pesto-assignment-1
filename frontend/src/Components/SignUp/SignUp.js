@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../../firebase-config'
+import { auth } from '../../firebase-config';
+import store from '../../store'
 import './SignUp.css'
 
-function SignUp(props) {
+function SignUp() {
     const [registerEmail, setregisterEmail] = useState(null)
     const [registerPassword, setregisterPassword] = useState(null)
     const [errorMsg, seterrorMsg] = useState(null)
@@ -14,7 +15,7 @@ function SignUp(props) {
         try {
             const authResponse = await createUserWithEmailAndPassword(auth, registerEmail, registerPassword)
             console.log(authResponse);
-            props.setuserEmail(authResponse.user.email)
+            store.dispatch({ type: 'App/authUser', payload: authResponse.user })
             navigate('/');
         } catch (error) {
             console.log(error);
@@ -26,9 +27,9 @@ function SignUp(props) {
     }
     return (
         <div className="sign-up-page">
-             
+
             <div className="sign-up-form-box">
-            {errorMsg &&<div style={{color:"red"}}>{errorMsg}</div>}
+                {errorMsg && <div style={{ color: "red" }}>{errorMsg}</div>}
                 <form>
                     <div className="form-group">
                         <label>Email <input type="email" class="form-control" placeholder="Enter email" onChange={(e) => setregisterEmail(e.target.value)} /></label>

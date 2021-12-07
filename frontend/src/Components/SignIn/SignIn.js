@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase-config'
+import store from '../../store'
 import './SignIn.css'
 
 function SignIn(props) {
@@ -15,7 +15,7 @@ function SignIn(props) {
         try {
             const authResponse = await signInWithEmailAndPassword(auth, signInEmail, signInPassword)
             console.log(authResponse);
-            props.setuserEmail(authResponse.user.email)
+            store.dispatch({ type: 'App/authUser', payload: authResponse.user })
             navigate('/');
         } catch (error) {
             console.log(error.message);
