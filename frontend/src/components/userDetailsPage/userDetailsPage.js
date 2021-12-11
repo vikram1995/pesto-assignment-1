@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams } from "react-router-dom";
-import './UserDetailsPage.css'
+import './userDetailsPage.css'
 function UserdetailsPage(props) {
     const { id } = useParams();
     const { usersList } = props;

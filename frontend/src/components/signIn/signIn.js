@@ -3,7 +3,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase-config'
 import store from '../../store'
-import './SignIn.css'
+import './signIn.css'
 
 function SignIn(props) {
     const [signInEmail, setsignInEmail] = useState(null)

@@ -1,4 +1,4 @@
-import Config from '../Config/config'
+import Config from '../config/config'
 const api = {}
 
 api.fetchUser = `${Config.serverUrl}/users`

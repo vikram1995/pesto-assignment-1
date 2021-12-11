@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { signOut } from "firebase/auth";
 import { auth } from '../../firebase-config'
 import store from '../../store'
-import './NavBar.css'
+import './navBar.css'
 
 function NavBar(props) {
     const [userEmail, setuserEmail] = useState(null)

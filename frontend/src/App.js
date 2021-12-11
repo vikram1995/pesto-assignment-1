@@ -1,10 +1,10 @@
 
 import './App.css';
 import { useState, useEffect } from 'react';
-import UserListPage from './Components/UserListPage/UserListPage'
-import LoadingSpinner from './Components/LoadingSpinner/LoadingSpinner'
-import SignUp from './Components/SignUp/SignUp';
-import NavBar from './Components/Navbar/NavBar';
+import UserListPage from './components/userListPage/userListPage'
+import LoadingSpinner from './components/loadingSpinner/loadingSpinner'
+import SignUp from './components/signUp/signUp';
+import NavBar from './components/navbar/navBar';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from './firebase-config'
 import store from './store'
@@ -14,9 +14,9 @@ import {
   Route,
   Navigate
 } from "react-router-dom";
-import UserDetailsPage from './Components/UserDetailsPage/UserDetailsPage';
-import SignIn from './Components/SignIn/SignIn';
-import PrivateRoute from './Components/privateRoute/privateRoute';
+import UserDetailsPage from './components/userDetailsPage/userDetailsPage';
+import SignIn from './components/signIn/signIn';
+import PrivateRoute from './components/privateRoute/privateRoute';
 
 function App() {
   const [userEmail, setuserEmail] = useState(null)
