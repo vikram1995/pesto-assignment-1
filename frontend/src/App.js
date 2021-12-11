@@ -7,7 +7,6 @@ import SignUp from './Components/SignUp/SignUp';
 import NavBar from './Components/Navbar/NavBar';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from './firebase-config'
-import Config from './Config/config'
 import store from './store'
 import {
   BrowserRouter,
@@ -17,46 +16,39 @@ import {
 } from "react-router-dom";
 import UserDetailsPage from './Components/UserDetailsPage/UserDetailsPage';
 import SignIn from './Components/SignIn/SignIn';
+import PrivateRoute from './Components/privateRoute/privateRoute';
 
 function App() {
-  const [usersList, setUsersList] = useState(null)
   const [userEmail, setuserEmail] = useState(null)
+  const [usersList, setUsersList] = useState(null)
 
-  const unsubscribe = store.subscribe(() => {
+  store.subscribe(() => {
     const state = store.getState().Apps
+    console.log(state);
     if (state.authUser) {
       setuserEmail(state.authUser.email)
     }
     else {
       setuserEmail(null)
     }
-  })
-
-
-  useEffect(async () => {
-    try {
-      const response = await fetch(`${Config.serverUrl}/users`)
-      const data = await response.json();
-      setUsersList(data);
-      store.dispatch({ type: 'App/usersList', payload: data })
-    } catch (error) {
-      console.log("falied to fetch data from server")
+    if (state.usersList && state.usersList.length > 0) {
+      setUsersList(state.usersList)
     }
-  }, [])
+    else {
+      setUsersList(null)
+    }
+  })
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
-        setuserEmail(currentUser.email);
         store.dispatch({ type: 'App/authUser', payload: currentUser })
         console.log(currentUser.email)
       }
     })
-  }, [])
 
-  function PrivateRoute({ children }) {
-    return userEmail ? children : <Navigate to="/sign-in" />;
-  }
+    store.dispatch({ type: 'USER_FETCH_REQUESTED' })
+  }, [])
 
   return (
     <div>
@@ -64,7 +56,7 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={usersList && <UserListPage usersList={usersList} />} />
-          <Route path="user/:id" element={usersList && <PrivateRoute><UserDetailsPage usersList={usersList} /></PrivateRoute>} />
+          <Route path="user/:id" element={usersList && <PrivateRoute userEmail={userEmail}><UserDetailsPage usersList={usersList} /></PrivateRoute>} />
           <Route path="sign-up" element={<SignUp />} />
           <Route path="sign-in" element={<SignIn />} />
         </Routes>
