@@ -9,8 +9,7 @@
 .sign-in-form-box{
     position: relative;
     top: 15%;
-    /* width: 400px; */
-    height: 375px;
+    height: 425px;
     border: 1px solid rgb(182, 182, 182);
     border-radius: 5px;
     padding: 20px;

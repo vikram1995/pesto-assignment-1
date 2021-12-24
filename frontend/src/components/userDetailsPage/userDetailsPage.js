@@ -1,10 +1,18 @@
 import React from 'react'
 import { useParams } from "react-router-dom";
-import './UserDetailsPage.css'
+import './userDetailsPage.css'
 function UserdetailsPage(props) {
     const { id } = useParams();
     const { usersList } = props;
-    const user = usersList[id - 1];  // index of user object is "id-1"
+    const userIdDetailsMap = {}
+
+    const createUserIdDetailsMap = () => {
+        usersList.forEach(user => {
+            userIdDetailsMap[user.id] = user
+        });
+    }
+    createUserIdDetailsMap();
+    const user = userIdDetailsMap[id];
 
     return (
         <div className="container mt-4">

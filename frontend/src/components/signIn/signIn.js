@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { GoogleAuthProvider, signInWithEmailAndPassword, getAuth, signInWithPopup } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../../firebase-config'
+import { auth } from '../../config/firebase-config'
 import store from '../../store'
-import './SignIn.css'
+import './signIn.css'
+import { googleAuthProvider } from '../../config/authMethods';
 
 function SignIn(props) {
     const [signInEmail, setsignInEmail] = useState(null)
@@ -23,15 +24,35 @@ function SignIn(props) {
         }
     }
 
-    function getErrorMsg (msg){
+    function getErrorMsg(msg) {
         return msg.split('/')[1].replace(/[^a-zA-Z ]/g, " ")
+    }
+
+    const handleSocialAuth = async (provider) => {
+        const auth = getAuth();
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential.accessToken;
+                const user = result.user;
+                store.dispatch({ type: 'App/authUser', payload: user })
+                console.log(user.displayName);
+                navigate('/');
+
+            }).catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                const email = error.email;
+                const credential = GoogleAuthProvider.credentialFromError(error);
+
+            });
     }
 
     return (
         <div className="sign-in-page">
-            
+
             <div className="sign-in-form-box">
-            {errorMsg &&<div style={{color:"red"}}>{errorMsg}</div>}    
+                {errorMsg && <div style={{ color: "red" }}>{errorMsg}</div>}
                 <form>
                     <div className="form-group">
                         <label>Email <input type="email" class="form-control" placeholder="Enter email" onChange={(e) => setsignInEmail(e.target.value)} /></label>
@@ -42,7 +63,8 @@ function SignIn(props) {
                     <button className="btn btn-primary" onClick={e => signIn(e)}>Sign In</button>
                 </form>
                 <hr className="my-4"></hr>
-                <button className="btn btn-lg btn-success" onClick={() => navigate('/sign-up')}>Create Account</button>
+                <button className="btn btn-lg btn-outline-secondary m-2" onClick={() => handleSocialAuth(googleAuthProvider)}>Sign In with Google</button>
+                <button className="btn btn-lg btn-success m-2" onClick={() => navigate('/sign-up')}>Create Account</button>
             </div>
         </div>
     )

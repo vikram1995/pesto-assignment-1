@@ -1,6 +1,6 @@
-import Config from '../Config/config'
+import Config from '../config/config'
 const api = {}
 
-api.fetchUser = `${Config.serverUrl}/users`
+api.fetchUser = `${Config.serverUrl}/usersList`
 
 export default api

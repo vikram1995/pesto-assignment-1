@@ -1,5 +1,5 @@
 import React from 'react'
-import './UserInfoCard.css'
+import './userInfoCard.css'
 import { Link } from 'react-router-dom'
 function UserInfoCard(props) {
     return (
