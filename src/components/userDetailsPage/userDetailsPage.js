@@ -19,7 +19,7 @@ function UserdetailsPage(props) {
             <div className="row jumbotron jumbotron-fluid">
                 <div className="col-md-4">
                     <div className="card">
-                        <img className="card-img-top" src={`https://avatars.dicebear.com/v2/avataaars/${user.username}.svg?options[mood][]=happy`} />
+                        <img className="card-img-top" src={`https://avatars.dicebear.com/v2/avataaars/${user.username}.svg?options[mood][]=happy`} alt="user-avatar"/>
                     </div>
                 </div>
                 <div className="col-md-8">
