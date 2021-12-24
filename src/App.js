@@ -11,8 +11,7 @@ import store from './store'
 import {
   BrowserRouter,
   Routes,
-  Route,
-  Navigate
+  Route
 } from "react-router-dom";
 import UserDetailsPage from './components/userDetailsPage/userDetailsPage';
 import SignIn from './components/signIn/signIn';

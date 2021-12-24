@@ -13,7 +13,7 @@ function NavBar(props) {
         store.dispatch({ type: 'App/authUser', payload: null })
         //props.setuserEmail(null)
     }
-    const unsubscribe = store.subscribe(() => {
+    store.subscribe(() => {
         // console.log('State after dispatch: ', store.getState().Apps.authUser.email)
         const state = store.getState().Apps
         if (state.authUser) {

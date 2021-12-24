@@ -19,7 +19,7 @@ function UserdetailsPage(props) {
             <div className="row jumbotron jumbotron-fluid">
                 <div className="col-md-4">
                     <div className="card">
-                        <img className="card-img-top" src={`https://avatars.dicebear.com/v2/avataaars/${user.username}.svg?options[mood][]=happy`} alt="Card image cap" />
+                        <img className="card-img-top" src={`https://avatars.dicebear.com/v2/avataaars/${user.username}.svg?options[mood][]=happy`} />
                     </div>
                 </div>
                 <div className="col-md-8">
@@ -33,11 +33,11 @@ function UserdetailsPage(props) {
 
                                 <li><a href={`tel:${user.phone}`}><div data-toggle="tooltip" data-placement="right" title="Phone"><i className="bi bi-telephone"></i> {user.phone}</div></a></li>
 
-                                <li><a href={`http://${user.website}`} target="_blank"><div data-toggle="tooltip" data-placement="right" title="Website"><i className="bi bi-globe"></i> {user.website}</div></a></li>
+                                <li><a href={`http://${user.website}`} target="_blank" rel="noreferrer"><div data-toggle="tooltip" data-placement="right" title="Website"><i className="bi bi-globe"></i> {user.website}</div></a></li>
 
-                                <li><a href={`http://www.google.com/search?q=${user.company.name}`} target="_blank"><div data-toggle="tooltip" data-placement="right" title="Company"><i className="bi bi-building"></i> {user.company.name}</div></a></li>
+                                <li><a href={`http://www.google.com/search?q=${user.company.name}`} target="_blank" rel="noreferrer"><div data-toggle="tooltip" data-placement="right" title="Company"><i className="bi bi-building"></i> {user.company.name}</div></a></li>
 
-                                <li><a href={`http://maps.google.com/maps?z=12&t=m&q=loc:${user.address.geo.lat}+${user.address.geo.lng}`} target="_blank"> <div data-toggle="tooltip" data-placement="right" title="Address"><i className="bi bi-geo-alt"></i>
+                                <li><a href={`http://maps.google.com/maps?z=12&t=m&q=loc:${user.address.geo.lat}+${user.address.geo.lng}`} target="_blank" rel="noreferrer"> <div data-toggle="tooltip" data-placement="right" title="Address"><i className="bi bi-geo-alt"></i>
                                     <address>{user.address.suite}, {user.address.street}, {user.address.city}, zipcode: {user.address.zipcode}</address></div></a></li>
 
                             </ul>

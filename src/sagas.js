@@ -1,4 +1,4 @@
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
+import { put,takeLatest } from 'redux-saga/effects'
 import Api from './urls/urls'
 import axios from 'axios'
 import { USERS_LIST_SCHEMA } from './schema/usersList'

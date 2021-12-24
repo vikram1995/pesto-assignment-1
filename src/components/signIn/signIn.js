@@ -33,17 +33,18 @@ function SignIn(props) {
         signInWithPopup(auth, provider)
             .then((result) => {
                 const credential = GoogleAuthProvider.credentialFromResult(result);
-                const token = credential.accessToken;
+                // const token = credential.accessToken;
                 const user = result.user;
                 store.dispatch({ type: 'App/authUser', payload: user })
                 console.log(user.displayName);
                 navigate('/');
 
             }).catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                const email = error.email;
-                const credential = GoogleAuthProvider.credentialFromError(error);
+                console.loh(error)
+                // const errorCode = error.code;
+                // const errorMessage = error.message;
+                // const email = error.email;
+                // const credential = GoogleAuthProvider.credentialFromError(error);
 
             });
     }
