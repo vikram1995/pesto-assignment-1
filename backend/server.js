@@ -45,7 +45,7 @@ const startServer = async () => {
     }
   }
 
-  app.use('/users', graphqlHTTP({
+  app.use('/usersList', graphqlHTTP({
     schema: schema,
     rootValue: root,
     graphiql: true,

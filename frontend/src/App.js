@@ -6,7 +6,7 @@ import LoadingSpinner from './components/loadingSpinner/loadingSpinner'
 import SignUp from './components/signUp/signUp';
 import NavBar from './components/navbar/navBar';
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from './firebase-config'
+import { auth } from './config/firebase-config'
 import store from './store'
 import {
   BrowserRouter,
